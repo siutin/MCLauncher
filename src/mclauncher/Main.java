@@ -24,7 +24,6 @@ public class Main {
     public static void main(String[] args) {
 
         init();
-        loadConfigs();
 
         MainGUI dialog = new MainGUI();
         dialog.setTitle("MCLauncer v1.0.0 by osiutino");
@@ -47,6 +46,7 @@ public class Main {
 
         pathDecode = PathDecodeFactory.create(osName,homeDir);
 
+        loadConfigs();
     }
 
     private static void loadConfigs() {
