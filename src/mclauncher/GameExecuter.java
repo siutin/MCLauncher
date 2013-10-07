@@ -1,7 +1,11 @@
 package mclauncher;
 
 import org.apache.log4j.Logger;
-import java.io.*;
+
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,10 +71,35 @@ public class GameExecuter implements Runnable{
             InputStreamReader isr = new InputStreamReader(process.getErrorStream());
             BufferedReader br = new BufferedReader(isr);
 
+            final StringBuilder sb = new StringBuilder();
+
             String line;
             while ((line = br.readLine()) != null){
                 logger.info(line);
+                sb.append(line+"\n");
             }
+
+            try {
+                process.waitFor();
+                int exitValue = process.exitValue();
+
+                if(exitValue != 0){
+
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ErrorDailog dialog = new ErrorDailog(sb.toString());
+                            dialog.setVisible(true);
+                        }
+                    });
+
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,7 +111,7 @@ public class GameExecuter implements Runnable{
         for (String param : params) {
             command += param + " ";
         }
-        System.out.println(command);
+        logger.info(command);
     }
 
 

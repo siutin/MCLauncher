@@ -5,6 +5,7 @@ import mclauncher.PathDecodes.PathDecodeFactory;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -25,11 +26,18 @@ public class Main {
 
         init();
 
-        MainGUI dialog = new MainGUI();
-        dialog.setTitle("MCLauncer v1.0.0 by osiutino");
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        final MainGUI dialog = new MainGUI();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                dialog.setTitle("MCLauncer v1.0.0 by osiutino");
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+
 
     }
 
