@@ -1,8 +1,7 @@
 package mclauncher;
 
 import mclauncher.PathDecodes.IPathDecode;
-import mclauncher.PathDecodes.LinuxPathDecode;
-import mclauncher.PathDecodes.MacPathDecode;
+import mclauncher.PathDecodes.PathDecodeFactory;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -46,12 +45,8 @@ public class Main {
         logger.info( "homeDir=".concat(homeDir) );
         logger.info( "osName=".concat(osName) );
 
-        OSs os = ENVHelper.OS(osName);
+        pathDecode = PathDecodeFactory.create(osName,homeDir);
 
-        if(os == OSs.MAC){
-            pathDecode = new MacPathDecode(homeDir);
-        }else if (os == OSs.LINUX)
-            pathDecode = new LinuxPathDecode(homeDir);
     }
 
     private static void loadConfigs() {
