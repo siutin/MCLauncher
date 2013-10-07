@@ -1,12 +1,13 @@
 package mclauncher;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.apache.log4j.Logger;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameExecuter implements Runnable{
+
+    private Logger logger = Logger.getLogger(GameExecuter.class);
 
     private JavaConfig _javaConfig;
     private GameConfig _gameConfig;
@@ -58,7 +59,7 @@ public class GameExecuter implements Runnable{
         try {
             Process process = pb.start();
 
-            System.out.printf("executed command:\n");
+            logger.info("------------------ Game Execute ------------------------");
 
             printCommand(params);
 
@@ -68,7 +69,7 @@ public class GameExecuter implements Runnable{
 
             String line;
             while ((line = br.readLine()) != null){
-                System.out.println(line);
+                logger.info(line);
             }
 
         } catch (IOException e) {

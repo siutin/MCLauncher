@@ -3,6 +3,8 @@ package mclauncher;
 import mclauncher.PathDecodes.IPathDecode;
 import mclauncher.PathDecodes.LinuxPathDecode;
 import mclauncher.PathDecodes.MacPathDecode;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,6 +19,8 @@ import java.util.Random;
  */
 
 public class Main {
+
+    private static Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -33,11 +37,15 @@ public class Main {
 
     private static void init(){
 
+        PropertyConfigurator.configure("setting.properties");
+
+        logger.info("-------------- MC launcher -------------");
+
         String homeDir = System.getProperty("user.home");
         String osName = System.getProperty("os.name");
+        logger.info( "homeDir=".concat(homeDir) );
+        logger.info( "osName=".concat(osName) );
 
-        System.out.println( homeDir );
-        System.out.println( osName );
         OSs os = ENVHelper.OS(osName);
 
         if(os == OSs.MAC){
@@ -86,20 +94,19 @@ public class Main {
 
     private static void printConfigs(){
 
-        System.out.println("------------ Print Configs --------------");
+        logger.info("------------ Print Configs --------------");
 
-        System.out.println("java=".concat(String.valueOf(javaConfig.getJava())));
-        System.out.println("Xms=".concat(String.valueOf(javaConfig.getXms())));
-        System.out.println("Xmx=".concat(String.valueOf(javaConfig.getXmx())));
-        System.out.println("java.library.path=".concat(String.valueOf(javaConfig.getJava_library_path())));
-        System.out.println("classpath=".concat(String.valueOf(javaConfig.getClasspath())));
-        System.out.println("session=".concat(String.valueOf(gameConfig.getSession())));
-        System.out.println("username=".concat(String.valueOf(gameConfig.getUserName())));
-        System.out.println("gameDir=".concat(String.valueOf(gameConfig.getGameDir())));
-        System.out.println("assetsDir=".concat(String.valueOf(gameConfig.getAssetsDir())));
-        System.out.println("version=".concat(String.valueOf(gameConfig.getVersion())));
+        logger.info("java=".concat(String.valueOf(javaConfig.getJava())));
+        logger.info("Xms=".concat(String.valueOf(javaConfig.getXms())));
+        logger.info("Xmx=".concat(String.valueOf(javaConfig.getXmx())));
+        logger.info("java.library.path=".concat(String.valueOf(javaConfig.getJava_library_path())));
+        logger.info("classpath=".concat(String.valueOf(javaConfig.getClasspath())));
+        logger.info("session=".concat(String.valueOf(gameConfig.getSession())));
+        logger.info("username=".concat(String.valueOf(gameConfig.getUserName())));
+        logger.info("gameDir=".concat(String.valueOf(gameConfig.getGameDir())));
+        logger.info("assetsDir=".concat(String.valueOf(gameConfig.getAssetsDir())));
+        logger.info("version=".concat(String.valueOf(gameConfig.getVersion())));
 
-        System.out.println("------------------------------------------");
     }
 
 
