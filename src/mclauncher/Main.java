@@ -114,14 +114,8 @@ public class Main {
 
 
     public static void RunGame(){
-        Thread th = new Thread( new GameExecuter(javaConfig, gameConfig) );
-        th.start();
-
-        try {
-            th.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        GameExecuter gameExecuter = new GameExecuter(javaConfig, gameConfig);
+        gameExecuter.run();
     }
 
 
