@@ -1,7 +1,5 @@
 package mclauncher;
 
-enum OSs {UNKNOWN, WIN, LINUX, MAC}
-
 public class ENVHelper{
 
     //Detect OS
