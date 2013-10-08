@@ -31,7 +31,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                dialog.setTitle("MCLauncer v1.0.0 by osiutino");
+                dialog.setTitle("MCLauncher v1.0.0 by osiutino");
                 dialog.pack();
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
